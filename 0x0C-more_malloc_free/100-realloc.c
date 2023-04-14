@@ -1,43 +1,48 @@
-#include "main.h"
+#include <stdlib.h>
+
 /**
- * _realloc - function that creates an array of chars,
- *  and initializes it with a specific char
- * @ptr: first bytes of the memory
- * @old_size: first bytes of the memory
- * @new_size: first bytes of the memory
- * Return: pointer to the resulting string dests
- */
+ * _realloc - reallocate a memory block using malloc and free
+ *
+ * @ptr: pointer to previous memory
+ * @old_size: old memory array size
+ * @new_size: new memory array size
+ *
+ * Return: pointer to new memory
+ *         NULL if it fails
+*/
+
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-	char *s;
+	char *new_ptr, *temp_ptr;
 	unsigned int i;
 
 	if (new_size == old_size)
-	{
 		return (ptr);
-	}
+
 	if (ptr == NULL)
 	{
-		ptr = malloc(new_size * sizeof(char));
-		if (ptr == NULL)
+		new_ptr = malloc(new_size);
+		if (new_ptr == NULL)
 			return (NULL);
-		return (ptr);
+		free(ptr);
+		return (new_ptr);
 	}
+
 	if (new_size == 0 && ptr != NULL)
 	{
 		free(ptr);
 		return (NULL);
 	}
-	s = malloc(old_size * sizeof(char));
-	if (s == NULL)
+
+	new_ptr = malloc(new_size);
+	if (new_ptr == NULL)
 		return (NULL);
+
+	temp_ptr = ptr;
+
 	for (i = 0; i < old_size; i++)
-		s[i] = *((char *)ptr + i);
+		new_ptr[i] = temp_ptr[i];
+
 	free(ptr);
-	ptr = malloc((new_size + 1) * sizeof(char));
-	if (ptr == NULL)
-		return (NULL);
-	for (i = 0; i < new_size; i++)
-		*((char *)ptr + i) = s[i];
-	return ((void *)ptr);
+	return (new_ptr);
 }
