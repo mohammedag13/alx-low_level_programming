@@ -76,7 +76,7 @@ void print_class(unsigned char *e_ident)
 	case ELFCLASSNONE:
 		printf("none\n");
 		break;
-	case ELFCLASS32:
+case ELFCLASS32:
 		printf("ELF32\n");
 		break;
 	case ELFCLASS64:
@@ -116,8 +116,9 @@ void print_data(unsigned char *e_ident)
  *   * @e_ident: A pointer to an array containing the ELF version.
  *    */
 void print_version(unsigned char *e_ident)
+
 {
-	 printf(" Version: %d",
+	printf(" Version: %d",
 			  e_ident[EI_VERSION]);
 
 	switch (e_ident[EI_VERSION])
@@ -156,7 +157,7 @@ void print_osabi(unsigned char *e_ident)
 	case ELFOSABI_SOLARIS:
 		printf("UNIX - Solaris\n");
 		break;
-	case ELFOSABI_IRIX:
+ase ELFOSABI_IRIX:
 		printf("UNIX - IRIX\n");
 		break;
 	case ELFOSABI_FREEBSD:
@@ -175,7 +176,6 @@ void print_osabi(unsigned char *e_ident)
 		printf("<unknown: %x>\n", e_ident[EI_OSABI]);
 	}
 }
-
 /**
  * print_abi - Prints the ABI version of an ELF header.
  * @e_ident: A pointer to an array containing the ELF ABI version.
